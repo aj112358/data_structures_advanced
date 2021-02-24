@@ -40,14 +40,22 @@ class ArrayQueue:
         if self.is_empty():
             raise Empty("The queue contains no elements.")
 
-        self._size -= 1
         elem = self._data[self._front]
+        self._size -= 1
         self._data[self._front] = None
         self._front = (self._front + 1) % self._N
 
-
+        return elem
 
     def enqueue(self, e):
         """Adds element 'e' to the back of the queue."""
 
+        if self._size == self._N:
+            self.resize()
+
+        back = (self._front + self._size) % self._N
+        self._data[back] = e
+
+    def resize(self):
+        pass
 
