@@ -91,24 +91,42 @@ class ArrayDeque:
         self._size += 1
 
     def add_first(self, e):
-        """Adds element 'e' to the front of the deque."""
+        """Adds element 'e' to the front of the deque.
+
+        If resizing is needed, the new element is added in the '_resize' method.
+        """
 
         # Enlarge underlying array if current deque is full.
         if self._size == len(self._data):
-            self._resize(self._size * 2)
-            
-        self._front = (self._front - 1) % len(self._data)
-        self._data[self._front] = e
-        self._size += 1
+            self._resize(self._size * 2, elem=e)
+            self._size += 1
+        else:
+            self._front = (self._front - 1) % len(self._data)
+            self._data[self._front] = e
+            self._size += 1
 
-    def _resize(self, capacity):
-        """Resize the underlying array to have size 'capacity'."""
+    def _resize(self, capacity, elem=None):
+        """Resize the underlying array to have size 'capacity'.
+
+        @param elem: An optional parameter to pass an element, used with 'add_first' method only.
+        """
 
         temp = [None] * capacity  # New array to store deque elements.
 
         for k in range(self._size):
-            temp[k] = self._data[self._front % len(self._data)]  # Copy deque elements into new array.
+
+            # Adding new 'elem' to front of deque, if _resize called from 'add_first'.
+            if elem and k == 0:
+                temp[0] = elem
+                continue
+
+            # Copying deque elements into new array.
+            temp[k] = self._data[self._front % len(self._data)]
             self._front = (self._front + 1) % len(self._data)
+
+        # If new 'elem' was added to front, still need to add last deque element to back of new array.
+        if elem:
+            temp[self._size] = self._data[self._front % len(self._data)]
 
         self._front = 0
         self._data = temp
@@ -122,9 +140,11 @@ if __name__ == "__main__":
     print()
 
     q = ArrayDeque(n=5)
+    print(q)
 
     q.add_last("A")
     q.add_last("B")
+    print(q)
     q.add_last("C")
     q.add_last("D")
     print(q)
@@ -155,3 +175,35 @@ if __name__ == "__main__":
 
     q.delete_first()
     print(q)
+
+    print('-----------------------------------')
+
+    print()
+
+    q2 = ArrayDeque(5)
+    print(q2)
+
+    q2.add_first("A")
+    q2.add_first("B")
+    q2.add_first("C")
+    q2.add_first("D")
+    print(q2)
+
+    q2.delete_last()
+    q2.delete_last()
+    print(q2)
+
+    q2.add_first("E")
+    q2.add_first("F")
+    q2.add_first("G")
+    print(q2)
+
+    print(q2.last())
+    print(q2.first())
+    print()
+
+    q2.add_first("H")
+    print(q2)
+
+    print(q2.last())
+    print(q2.first())
