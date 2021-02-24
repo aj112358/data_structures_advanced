@@ -6,7 +6,7 @@ Date: Feb 23, 2021
 
 
 class Empty(Exception):
-    """The error to raise when attempting to access an element from an empty stack."""
+    """The error to raise when attempting to access an element from an empty queue."""
     pass
 
 
