@@ -58,7 +58,7 @@ class LinkedQueue:
             raise Empty("No elements in queue.")
 
         elem = self._head._element
-        self._head = self._head._next  # Will become 'None' if queue is now empty!
+        self._head = self._head._next  # Head node will automatically become 'None' if queue is now empty!
         self._size -= 1
 
         if self._size == 0:
