@@ -8,7 +8,8 @@ Created By: AJ Singh
 Date: Mar 4, 2021
 """
 
-from Stacks.implementation_using_array import Empty
+# This import is not needed! Because we will always have at least the sentinel nodes!
+# from Stacks.implementation_using_array import Empty
 
 
 class _DoublyLinkedBase:
@@ -28,11 +29,15 @@ class _DoublyLinkedBase:
     def __init__(self):
         """Creating a new empty doubly linked list."""
 
+        # Sentinel nodes.
         self._header = self._Node(None, None, None)
         self._trailer = self._Node(None, None, None)
+
+        # Point to one another initially.
         self._header._next = self._trailer
         self._trailer._prev = self._header
-        self._size = 0
+
+        self._size = 0  # Maintain reference to current number of non-sentinel (ie. element) nodes.
 
     def __len__(self):
         """Returns the current number of element nodes in a doubly linked list."""
@@ -47,13 +52,14 @@ class _DoublyLinkedBase:
 
         new = self._Node(e, predecessor, successor)
 
+        # Re-assign links of adjacent nodes to the new node.
         predecessor._next = new
         successor._prev = new
 
         self._size += 1
+        return new  # For convenience.
 
-        return new
-
+    # BETTER TO SIMPLY USE THE NODE IN QUESTION!!!! SEE IMPLEMENTATION BELOW
     # def _delete_node(self, predecessor, successor):
     #     """Delete the node between the predecessor and successor nodes."""
     #
@@ -67,19 +73,21 @@ class _DoublyLinkedBase:
     #     self._size -= 1
 
     def _delete_node(self, node):
-        """Deletes 'node' from the linked list."""
+        """Deletes 'node' (an element node; non-sentinel) from the linked list."""
 
         predecessor = node._prev
         successor = node._next
 
+        # Re-assign links of adjacent nodes to each other.
         predecessor._next = successor
         successor._prev = predecessor
         self._size -= 1
 
-        element = node._element  # To return.
+        element = node._element  # Old element to return.
 
+        # For Python garbage collection.
         node._prev = None
         node._next = None
         node._element = None
 
-        return element
+        return element  # For convenience.
