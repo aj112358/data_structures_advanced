@@ -73,8 +73,3 @@ class CircularQueue:
         """Performs the operation of shifting the front node to the back of the queue."""
         if not self.is_empty():
             self._tail = self._tail._next  # The old head now becomes the new tail.
-
-
-if __name__ == "__main__":
-
-    print("Hello world")
