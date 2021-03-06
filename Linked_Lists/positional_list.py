@@ -59,16 +59,22 @@ class PositionalList:
     # All accessor methods.
 
     def first(self):
-        pass
+        """Return Position of first element, or None if positional list is empty."""
+        return self._make_position(self._header._next)
 
     def last(self):
-        pass
+        """Return Position of last element, or None if positional list is empty."""
+        return self._make_position(self._trailer._next)
 
     def before(self, p):
-        pass
+        """Return Position just before Position p, or None if p is first."""
+        node = self._validate(p)
+        return self._make_position(node._prev)
 
     def after(self, p):
-        pass
+        """Return Position just after Position p, or None if p is first."""
+        node = self._validate(p)
+        return self._make_position(node._next)
 
     def is_empty(self):
         pass
