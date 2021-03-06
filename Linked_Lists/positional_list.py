@@ -5,7 +5,6 @@ Date: March 5, 2021
 """
 
 from doubly_linked_list_base_class import _DoublyLinkedBase
-from Stacks.implementation_using_array import Empty
 
 
 class PositionalList(_DoublyLinkedBase):
@@ -35,6 +34,7 @@ class PositionalList(_DoublyLinkedBase):
 
     # ----- All utility methods. ----- #
 
+    # Given a position, this will return the associated node.
     def _validate(self, p):
         """Return node at position 'p', or raise error if position is invalid."""
 
@@ -49,6 +49,7 @@ class PositionalList(_DoublyLinkedBase):
 
         return p._node
 
+    # Given a node, this will return its associated position.
     def _make_position(self, node):
         """Return node's Position instance, or None if node is a sentinel."""
 
@@ -91,10 +92,9 @@ class PositionalList(_DoublyLinkedBase):
     # def is_empty(self):
     #     pass
 
-    # All mutator methods
+    # ----- All mutator methods ----- #
 
     # Overriding inherited version to return Position, instead of Node
-
     def _insert_between(self, e, predecessor, successor):
         """Add element between existing nodes and return new Positions."""
         node = super()._insert_between(e, predecessor, successor)
@@ -110,13 +110,13 @@ class PositionalList(_DoublyLinkedBase):
 
     def add_before(self, p, e):
         """Insert element 'e' into positional list, right before Position p, and return its new position."""
-        original = self._validate(p)
-        return self._insert_between(e, original._prev, original)
+        original_node = self._validate(p)
+        return self._insert_between(e, original_node._prev, original_node)
 
     def add_after(self, p, e):
         """Insert element 'e' into positional list, right after Position p, and return its new position."""
-        original = self._validate(p)
-        return self._insert_between(e, original, original._next)
+        original_node = self._validate(p)
+        return self._insert_between(e, original_node, original_node._next)
 
     def delete(self, p):
         """Remove and return the element at Position p."""
@@ -127,6 +127,6 @@ class PositionalList(_DoublyLinkedBase):
     def replace(self, p, e):
         """Replace element at position 'p' with new element 'e', and return old element."""
         node = self._validate(p)
-        elem = node._element
-        node._element = e
+        elem = node._element  # Old element to return.
+        node._element = e     # Assigning new element to node.
         return elem
