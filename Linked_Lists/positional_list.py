@@ -33,7 +33,7 @@ class PositionalList(_DoublyLinkedBase):
             """Return True if 'other' does not represent the same location."""
             return not (self == other)
 
-    # All utility methods.
+    # ----- All utility methods. ----- #
 
     def _validate(self, p):
         """Return node at position 'p', or raise error if position is invalid."""
@@ -56,7 +56,7 @@ class PositionalList(_DoublyLinkedBase):
             return None
         return self.Position(self, node)
 
-    # All accessor methods.
+    # ----- All accessor methods. ----- #
 
     def first(self):
         """Return Position of first element, or None if positional list is empty."""
@@ -123,6 +123,10 @@ class PositionalList(_DoublyLinkedBase):
         node_to_delete = self._validate(p)
         # return super()._delete_node(node_to_delete)
         return self._delete_node(node_to_delete)
-    
+
     def replace(self, p, e):
-        pass
+        """Replace element at position 'p' with new element 'e', and return old element."""
+        node = self._validate(p)
+        elem = node._element
+        node._element = e
+        return elem
