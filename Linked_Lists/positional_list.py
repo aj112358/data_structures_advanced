@@ -57,3 +57,24 @@ class PositionalList:
         return self.Position(self, node)
 
     # All accessor methods.
+
+    def first(self):
+        pass
+
+    def last(self):
+        pass
+
+    def before(self, p):
+        pass
+
+    def after(self, p):
+        pass
+
+    def is_empty(self):
+        pass
+
+    def __len__(self):
+        pass
+
+    def __iter__(self):
+        pass
