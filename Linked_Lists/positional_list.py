@@ -109,10 +109,14 @@ class PositionalList(_DoublyLinkedBase):
         self._insert_between(e, self._trailer._prev, self._trailer)
 
     def add_before(self, p, e):
-        pass
+        """Insert element 'e' into positional list, right before Position p, and return its new position."""
+        original = self._validate(p)
+        return self._insert_between(e, original._prev, original)
 
     def add_after(self, p, e):
-        pass
+        """Insert element 'e' into positional list, right after Position p, and return its new position."""
+        original = self._validate(p)
+        return self._insert_between(e, original, original._next)
 
     def replace(self, p, e):
         pass
