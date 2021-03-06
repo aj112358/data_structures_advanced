@@ -101,10 +101,12 @@ class PositionalList(_DoublyLinkedBase):
         return self._make_position(node)
 
     def add_first(self, e):
-        pass
+        """Insert element 'e' at the front of the positional list, and return its new Position."""
+        self._insert_between(e, self._header, self._header._next)
 
     def add_last(self, e):
-        pass
+        """Insert element 'e' at the back of the positional list, and return its new Position."""
+        self._insert_between(e, self._trailer._prev, self._trailer)
 
     def add_before(self, p, e):
         pass
