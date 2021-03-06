@@ -8,7 +8,7 @@ from doubly_linked_list_base_class import _DoublyLinkedBase
 from Stacks.implementation_using_array import Empty
 
 
-class PositionalList:
+class PositionalList(_DoublyLinkedBase):
     """A sequential container of elements allowing positional access."""
 
     # Objects to represent position of a node.
@@ -76,11 +76,26 @@ class PositionalList:
         node = self._validate(p)
         return self._make_position(node._next)
 
-    def is_empty(self):
-        pass
-
-    def __len__(self):
-        pass
-
     def __iter__(self):
-        pass
+        """Generate a forward iteration of elements of positional list."""
+        cursor = self.first()
+        while cursor is not None:
+            yield cursor.element()
+            cursor = self.after(cursor)
+
+    ## __len__ method inherited from super class.
+    # def __len__(self):
+    #     pass
+
+    ## Inherited from super class.
+    # def is_empty(self):
+    #     pass
+
+    # All mutator methods
+
+    # Overriding inherited version to return Position, instead of Node
+
+    def _insert_between(self, e, predecessor, successor):
+        """Add element between existing nodes and return new Positions."""
+        node = super()._insert_between(e, predecessor, successor)
+        return self._make_position(node)
