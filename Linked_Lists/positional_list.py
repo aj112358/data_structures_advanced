@@ -118,5 +118,11 @@ class PositionalList(_DoublyLinkedBase):
         original = self._validate(p)
         return self._insert_between(e, original, original._next)
 
+    def delete(self, p):
+        """Remove and return the element at Position p."""
+        node_to_delete = self._validate(p)
+        # return super()._delete_node(node_to_delete)
+        return self._delete_node(node_to_delete)
+    
     def replace(self, p, e):
         pass
