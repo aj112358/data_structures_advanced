@@ -99,3 +99,18 @@ class PositionalList(_DoublyLinkedBase):
         """Add element between existing nodes and return new Positions."""
         node = super()._insert_between(e, predecessor, successor)
         return self._make_position(node)
+
+    def add_first(self, e):
+        pass
+
+    def add_last(self, e):
+        pass
+
+    def add_before(self, p, e):
+        pass
+
+    def add_after(self, p, e):
+        pass
+
+    def replace(self, p, e):
+        pass
