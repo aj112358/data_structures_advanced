@@ -60,6 +60,7 @@ class FavoritesList:
         """Access element 'e', and increase its frequency count."""
         elem_pos = self._find_position(e)
 
+        # Must add element if doesn't currently exist in the favorites list.
         if elem_pos is None:
             elem_pos = self._data.add_last(self._Item(e))
 
@@ -70,7 +71,10 @@ class FavoritesList:
         self._move_up(elem_pos)
 
     def remove(self, e):
-        pass
+        """Remove element 'e' from favorites list."""
+        p = self._find_position(e)
+        if p is not None:
+            self._data.delete(p)
 
     def top(self, k):
         pass
