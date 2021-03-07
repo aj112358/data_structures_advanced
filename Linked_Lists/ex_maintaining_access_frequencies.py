@@ -48,13 +48,26 @@ class FavoritesList:
         self._data = PositionalList()  # Will be a list of _Item instances (from nested class above)
 
     def __len__(self):
-        pass
+        """Return number of elements in favorites list."""
+        return len(self._data)
 
     def is_empty(self):
-        pass
+        """Return True if favorites list is empty."""
+        # return self._data.is_empty()
+        return len(self._data) == 0
 
     def access(self, e):
-        pass
+        """Access element 'e', and increase its frequency count."""
+        elem_pos = self._find_position(e)
+
+        if elem_pos is None:
+            elem_pos = self._data.add_last(self._Item(e))
+
+        # elem_node = self._data._validate(elem_pos)
+        # elem = elem_node._element
+
+        elem_pos.element()._count += 1
+        self._move_up(elem_pos)
 
     def remove(self, e):
         pass
