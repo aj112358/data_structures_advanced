@@ -14,6 +14,7 @@ class FavoritesList:
     class _Item:
         """Object to store elements' value and access counts."""
         __slots__ = "_value", "_count"
+
         def __init__(self, e):
             self._value = e  # Element.
             self._count = 0  # To store access count.
@@ -77,4 +78,17 @@ class FavoritesList:
             self._data.delete(p)
 
     def top(self, k):
-        pass
+        """Generate a sequence (create a generator for) of the top 'k' elements, with respect to access counts."""
+
+        if not 1 <= k <= len(self):
+            raise ValueError("'k' value outside of range.")
+
+        top = list()
+
+        walk = self._data.first()
+        for i in range(k):
+            item = walk.element()
+            elem = item._value
+            top.append(elem)
+            yield elem
+            walk = self._data.after(walk)
