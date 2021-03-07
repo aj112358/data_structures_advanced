@@ -73,7 +73,7 @@ class PositionalList(_DoublyLinkedBase):
         return self._make_position(node._prev)
 
     def after(self, p):
-        """Return Position just after Position p, or None if p is first."""
+        """Return Position just after Position p, or None if p is last."""
         node = self._validate(p)
         return self._make_position(node._next)
 
