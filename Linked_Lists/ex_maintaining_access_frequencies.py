@@ -65,6 +65,7 @@ class FavoritesList:
         if elem_pos is None:
             elem_pos = self._data.add_last(self._Item(e))
 
+        ## Don't need because we are not returning anything.
         # elem_node = self._data._validate(elem_pos)
         # elem = elem_node._element
 
@@ -83,12 +84,13 @@ class FavoritesList:
         if not 1 <= k <= len(self):
             raise ValueError("'k' value outside of range.")
 
-        top = list()
+        ## Don't need because we are not returning a list, only making a generator.
+        # top = list()
 
         walk = self._data.first()
         for i in range(k):
             item = walk.element()
             elem = item._value
-            top.append(elem)
+            # top.append(elem)
             yield elem
             walk = self._data.after(walk)
