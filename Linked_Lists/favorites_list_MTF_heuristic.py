@@ -5,6 +5,7 @@ Date: March 7, 2021
 """
 
 from ex_maintaining_access_frequencies import FavoritesList
+from positional_list import PositionalList
 
 
 class FavoritesListMTF(FavoritesList):
@@ -14,4 +15,6 @@ class FavoritesListMTF(FavoritesList):
     def _move_up(self, p):
         """Moves accessed item from position 'p' to front of the list."""
 
-        
+        if p != self._data.first():
+            elem = self._data.delete(p)
+            self._data.add_first(elem)
