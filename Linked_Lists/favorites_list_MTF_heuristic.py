@@ -33,4 +33,17 @@ class FavoritesListMTF(FavoritesList):
 
         # Iteratively find 'k' most frequently accessed elements, and remove them.
         for i in range(k):
-            pass
+
+            high_pos = temp.first()  # Initializing first element as highest so far.
+            walk = temp.after(high_pos)  # Initializing second element as one to compare with.
+
+            # Must iterate through entire positional list!
+            while walk is not None:
+                if walk.element()._count > high_pos.element()._count:
+                    high_pos = walk  # Updating highest position as we go.
+                walk = temp.after(walk)  # Updating next element to be compared with.
+
+            yield high_pos.element()._value  # Reporting current highest element to user.
+
+            # Removing currently found highest element from temporary list, before iterating again.
+            temp.delete(high_pos)
