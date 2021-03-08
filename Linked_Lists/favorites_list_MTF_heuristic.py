@@ -18,3 +18,19 @@ class FavoritesListMTF(FavoritesList):
         if p != self._data.first():
             elem = self._data.delete(p)
             self._data.add_first(elem)
+
+    # Overriding top() method, because list is no longer sorted.
+    def top(self, k):
+        """Create generator for the top 'k' elements, with respect to access frequency."""
+
+        if not 1 <= k <= len(self):
+            raise ValueError("'k' value outside of range.")
+
+        # Using a temporary list to store items from favorites list.
+        temp = PositionalList()
+        for item in self._data:
+            temp.add_last(item)
+
+        # Iteratively find 'k' most frequently accessed elements, and remove them.
+        for i in range(k):
+            pass
