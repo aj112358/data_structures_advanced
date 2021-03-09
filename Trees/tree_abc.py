@@ -49,4 +49,27 @@ class Tree:
 
     # ----- Concrete methods supported for all subclasses. ----- #
 
-    
+    def is_root(self, p):
+        """Return True if position 'p' is the root of the tree, else return False."""
+        return p == self.root()
+
+    def is_leaf(self, p):
+        """Return True if position 'p' does *not* have any children."""
+        return self.num_children(p) == 0
+
+    def is_empty(self):
+        """Return True if the tree is empty."""
+        return len(self) == 0
+
+    # ----- Other useful concrete methods (apart from ADT). ----- #
+
+    def depth(self, p):
+        """Return the number of levels separating the node at 'p' from the root.
+
+        Essentially, the number of ancestors of 'p', excluding 'p' itself.
+        """
+
+        if self.is_root(p):
+            return 0
+        else:
+            return 1 + self.depth(self.parent(p))
