@@ -35,3 +35,11 @@ class BinaryTree(Tree):
         #     if p != child:
         #         return child
         # return None
+
+    def children(self, p):
+        """Generate an iteration of the children of node 'p'."""
+
+        if self.left(p) is not None:
+            yield self.left(p)
+        if self.right(p) is not None:
+            yield self.right(p)
