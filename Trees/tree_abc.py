@@ -6,6 +6,7 @@ Date: March 9, 2021
 
 from abc import abstractmethod
 
+
 class Tree:
     """An ABC for tree structures."""
 
@@ -73,3 +74,21 @@ class Tree:
             return 0
         else:
             return 1 + self.depth(self.parent(p))
+
+    # Non-public method to assist in computing height.
+    def __height(self, p):
+        """Return height of sub-tree rooted at 'p'."""
+        if self.is_leaf(p):
+            return 0
+        else:
+            return 1 + max(self.__height(c) for c in self.children(p))
+
+    # Concrete method for computing height.
+    def height(self, p=None):
+        """Return height of the sub-tree rooted at 'p'.
+
+        If 'p' is None, then return the height of entire tree.
+        """
+        if p is None:
+            p = self.root()
+        return self.__height(p)
