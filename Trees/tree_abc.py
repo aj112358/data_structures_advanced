@@ -4,10 +4,10 @@ Created By: AJ Singh
 Date: March 9, 2021
 """
 
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 
 
-class Tree:
+class Tree(ABC):
     """An ABC for tree structures."""
 
     # Objects to represent position of a tree node.
