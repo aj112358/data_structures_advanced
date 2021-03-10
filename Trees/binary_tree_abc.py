@@ -12,4 +12,12 @@ class BinaryTree(Tree):
 
     # ----- Abstract methods, specific for binary trees. ----- #
 
+    def left(self, p):
+        """Return position of left child node of 'p', or None if 'p' has no left child."""
+
+    def right(self, p):
+        """Return position of right child of 'p', or None if 'p' has no right child."""
+
+    # ----- Concrete methods ----- #
+
     
