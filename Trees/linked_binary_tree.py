@@ -65,3 +65,28 @@ class LinkedBinaryTree(BinaryTree):
         return self.Position(self, node)
 
     # ----- Binary tree constructor ----- #
+
+    def __init__(self):
+        """Initialize an empty binary tree."""
+        self._root = None
+        self._size = 0
+
+    # ----- Accessor Methods ----- #
+
+    def left(self, p):
+        pass
+
+    def right(self, p):
+        pass
+
+    def root(self):
+        pass
+
+    def parent(self, p):
+        pass
+
+    def num_children(self, p):
+        pass
+
+    def __len__(self):
+        pass
