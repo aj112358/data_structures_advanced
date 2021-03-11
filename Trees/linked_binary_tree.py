@@ -73,20 +73,31 @@ class LinkedBinaryTree(BinaryTree):
 
     # ----- Accessor Methods ----- #
 
+    def __len__(self):
+        """Return number of nodes in the tree."""
+        return self._size
+
+    def root(self):
+        """Return position of root node, or None if tree is empty."""
+        if self._size == 0:
+            return None
+        return self._make_position(self._root)
+
+    def parent(self, p):
+        """Return the position of the parent of node 'p', or None if 'p' is the root node."""
+        node = self._validate(p)
+        return self._make_position(node._parent)
+
+    def num_children(self, p):
+        pass
+
     def left(self, p):
         pass
 
     def right(self, p):
         pass
 
-    def root(self):
-        pass
 
-    def parent(self, p):
-        pass
 
-    def num_children(self, p):
-        pass
 
-    def __len__(self):
-        pass
+
