@@ -110,21 +110,29 @@ class LinkedBinaryTree(BinaryTree):
 
     # ----- Update Methods ----- #
 
-    def add_root(self, e):
+    def _add_root(self, e):
+        """Create a root node containing element 'e' for an empty tree, and return the new position."""
+
+        if self._root is not None:
+            raise ValueError("Root node already exists for this tree.")
+
+        new_root = self._Node(element=e)
+        self._root = new_root
+        self._size += 1
+        return self._make_position(self._root)
+
+    def _add_left(self, p, e):
         pass
 
-    def add_left(self, p, e):
+    def _add_right(self, p, e):
         pass
 
-    def add_right(self, p, e):
+    def _replace(self, p, e):
         pass
 
-    def replace(self, p, e):
+    def _delete(self, p):
         pass
 
-    def delete(self, p):
-        pass
-
-    def attach(self, p, t1, t2):
+    def _attach(self, p, t1, t2):
         pass
 
