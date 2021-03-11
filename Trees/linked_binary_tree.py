@@ -92,10 +92,14 @@ class LinkedBinaryTree(BinaryTree):
         pass
 
     def left(self, p):
-        pass
+        """Return the position of p's left child, or None if it has no left child."""
+        node = self._validate(p)
+        return self._make_position(node._left)
 
     def right(self, p):
-        pass
+        """Return the position of p's right child, or None if it has no right child."""
+        node = self._validate(p)
+        return self._make_position(node._right)
 
 
 
