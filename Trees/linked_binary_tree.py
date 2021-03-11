@@ -10,6 +10,7 @@ from binary_tree_abc import BinaryTree
 class LinkedBinaryTree(BinaryTree):
     """A binary tree structure using a linked representation."""
 
+    # Objects to represent physical tree nodes.
     class _Node:
         """Class for node objects."""
 
@@ -37,3 +38,30 @@ class LinkedBinaryTree(BinaryTree):
         def __eq__(self, other):
             """Return True if 'other' is a Position representing the same location."""
             return (type(other) is type(self)) and (other._node is self._node)
+
+    # ----- All utility methods. ----- #
+
+    # Given a position, this will return the associated node.
+    def _validate(self, p):
+        """Return node at position 'p', or raise error if position is invalid."""
+
+        if not isinstance(p, self.Position):
+            raise TypeError("Given parameter must be of type Position.")
+
+        if p._container is not self:
+            raise ValueError("Given position parameter does not belong to this container.")
+
+        if p._node._parent is p._node:  # Convention for deprecated nodes???
+            raise ValueError("Given position is no longer valid.")
+
+        return p._node
+
+    # Given a node, this will return its associated position.
+    def _make_position(self, node):
+        """Return node's Position instance, or None if node is a sentinel."""
+
+        if node is None:
+            return None
+        return self.Position(self, node)
+
+    # ----- Binary tree constructor ----- #
