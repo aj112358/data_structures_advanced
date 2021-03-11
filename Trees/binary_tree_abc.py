@@ -4,6 +4,7 @@ Created By: AJ Singh
 Date: March 10, 2021
 """
 
+from abc import abstractmethod
 from tree_abc import Tree
 
 
@@ -12,9 +13,11 @@ class BinaryTree(Tree):
 
     # ----- Abstract methods, specific for binary trees. ----- #
 
+    @abstractmethod
     def left(self, p):
         """Return position of left child node of 'p', or None if 'p' has no left child."""
 
+    @abstractmethod
     def right(self, p):
         """Return position of right child of 'p', or None if 'p' has no right child."""
 
