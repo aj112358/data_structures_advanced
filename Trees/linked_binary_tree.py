@@ -108,7 +108,23 @@ class LinkedBinaryTree(BinaryTree):
         node = self._validate(p)
         return self._make_position(node._right)
 
+    # ----- Update Methods ----- #
 
+    def add_root(self, e):
+        pass
 
+    def add_left(self, p, e):
+        pass
 
+    def add_right(self, p, e):
+        pass
+
+    def replace(self, p, e):
+        pass
+
+    def delete(self, p):
+        pass
+
+    def attach(self, p, t1, t2):
+        pass
 
