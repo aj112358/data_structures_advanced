@@ -171,19 +171,19 @@ class LinkedBinaryTree(BinaryTree):
         node = self._validate(p)
         elem = node._element
         child = node._left if node._left else node._right  # Possible to have no child nodes, hence None.
-        parent = self.parent(p)
+        parent = node._parent
 
         if child is not None:
-            child._parent = node._parent
+            child._parent = parent
 
         if parent is None:  # Node to delete IS the root node.
             self._root = child
 
         if parent is not None:  # Node to delete is NOT the root node.
-            if self.left(parent) == p:
-                node._parent._left = child
-            if self.right(parent) == p:
-                node._parent._right = child
+            if node == parent._left:
+                parent._left = child
+            if node == parent._right:
+                parent._right = child
 
         node._parent = node  # Convention for deprecated node???
         self._size -= 1
