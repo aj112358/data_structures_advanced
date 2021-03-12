@@ -108,7 +108,7 @@ class LinkedBinaryTree(BinaryTree):
         node = self._validate(p)
         return self._make_position(node._right)
 
-    # ----- Update Methods ----- #
+    # ----- Update Methods (all are non-public) ----- #
 
     def _add_root(self, e):
         """Create a root node containing element 'e' for an empty tree, and return the new position."""
@@ -159,7 +159,59 @@ class LinkedBinaryTree(BinaryTree):
         return elem
 
     def _delete(self, p):
-        pass
+        """Remove the node at position 'p' and replace it with its child (if any).
+
+        Raise ValueError if position 'p' has two child nodes, or is invalid.
+        @return - element that was stored
+        """
+
+        if self.num_children(p) == 2:
+            raise ValueError("Node at p has two children.")
+
+        node = self._validate(p)
+        elem = node._element
+        child = node._left if node._left else node._right  # Possible to have no child nodes, hence None.
+        parent = self.parent(p)
+
+        # Node to delete does have children.
+        if child is not None:
+
+            parent_node = self._validate(parent)
+
+            if parent is None:  # Node to delete IS the root node.
+                child._parent = None
+            else:  # Node to delete is NOT the root node.
+
+                if self.left(parent) == p:
+                    parent_node._left = child
+                    child._parent = parent_node
+
+                if self.right(parent) == p:
+                    parent_node._right = child
+                    child._parent = parent_node
+
+        # Node to delete has NO children.
+        else:
+
+            parent_node = self._validate(parent)
+
+            if parent is None:  # Node to delete IS the root node.
+                node._parent = None
+
+            else: # Node to delete is NOT the root node.
+
+                if self.left(parent) == p:
+                    node._parent = None
+                    parent_node._left = None
+
+                if self.right(parent) == p:
+                    node._parent = None
+                    parent_node._right = None
+
+        return elem
+
+
+
 
     def _attach(self, p, t1, t2):
         pass
