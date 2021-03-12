@@ -169,7 +169,6 @@ class LinkedBinaryTree(BinaryTree):
             raise ValueError("Node at p has two children.")
 
         node = self._validate(p)
-        elem = node._element
         child = node._left if node._left else node._right  # Possible to have no child nodes, hence None.
         parent = node._parent
 
@@ -178,17 +177,15 @@ class LinkedBinaryTree(BinaryTree):
 
         if parent is None:  # Node to delete IS the root node.
             self._root = child
-
-        if parent is not None:  # Node to delete is NOT the root node.
-            if node == parent._left:
+        else:  # Node to delete is NOT the root node.
+            if node is parent._left:
                 parent._left = child
-            if node == parent._right:
+            else:
                 parent._right = child
 
         node._parent = node  # Convention for deprecated node???
         self._size -= 1
-        return elem
+        return node._element
 
     def _attach(self, p, t1, t2):
         pass
-
