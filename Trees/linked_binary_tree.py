@@ -173,47 +173,22 @@ class LinkedBinaryTree(BinaryTree):
         child = node._left if node._left else node._right  # Possible to have no child nodes, hence None.
         parent = self.parent(p)
 
-        # Node to delete DOES have children.
-        if child is not None:
+        if child is not None:  # Node to delete DOES have children.
+            child._parent = node._parent
 
+        else:  # Node to delete has NO children.
             if parent is None:  # Node to delete IS the root node.
-                child._parent = None
-            else:  # Node to delete is NOT the root node.
+                self._root = node._parent  # Will be None!
 
-                parent_node = self._validate(parent)
+        if parent is not None:  # Node to delete is NOT the root node.
+            if self.left(parent) == p:
+                node._parent._left = child  # child is None anyways!
+            if self.right(parent) == p:
+                node._parent._right = child
 
-                if self.left(parent) == p:
-                    parent_node._left = child
-                    child._parent = parent_node
-
-                if self.right(parent) == p:
-                    parent_node._right = child
-                    child._parent = parent_node
-
-        # Node to delete has NO children.
-        else:
-
-            if parent is None:  # Node to delete IS the root node.
-                # node._parent = None
-                self._root = None
-
-            else: # Node to delete is NOT the root node.
-
-                parent_node = self._validate(parent)
-
-                if self.left(parent) == p:
-                    node._parent = None
-                    parent_node._left = None
-
-                if self.right(parent) == p:
-                    node._parent = None
-                    parent_node._right = None
-
+        node._parent = None
         self._size -= 1
         return elem
-
-
-
 
     def _attach(self, p, t1, t2):
         pass
