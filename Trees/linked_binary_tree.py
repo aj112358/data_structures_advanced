@@ -161,7 +161,7 @@ class LinkedBinaryTree(BinaryTree):
     def _delete(self, p):
         """Remove the node at position 'p' and replace it with its child (if any).
 
-        Raise ValueError if position 'p' has two child nodes, or is invalid.
+        Raise ValueError if position 'p' has two child nodes (ambiguity), or is invalid.
         @return - element that was stored
         """
 
@@ -173,14 +173,14 @@ class LinkedBinaryTree(BinaryTree):
         child = node._left if node._left else node._right  # Possible to have no child nodes, hence None.
         parent = self.parent(p)
 
-        # Node to delete does have children.
+        # Node to delete DOES have children.
         if child is not None:
-
-            parent_node = self._validate(parent)
 
             if parent is None:  # Node to delete IS the root node.
                 child._parent = None
             else:  # Node to delete is NOT the root node.
+
+                parent_node = self._validate(parent)
 
                 if self.left(parent) == p:
                     parent_node._left = child
@@ -193,12 +193,13 @@ class LinkedBinaryTree(BinaryTree):
         # Node to delete has NO children.
         else:
 
-            parent_node = self._validate(parent)
-
             if parent is None:  # Node to delete IS the root node.
-                node._parent = None
+                # node._parent = None
+                self._root = None
 
             else: # Node to delete is NOT the root node.
+
+                parent_node = self._validate(parent)
 
                 if self.left(parent) == p:
                     node._parent = None
@@ -208,6 +209,7 @@ class LinkedBinaryTree(BinaryTree):
                     node._parent = None
                     parent_node._right = None
 
+        self._size -= 1
         return elem
 
 
