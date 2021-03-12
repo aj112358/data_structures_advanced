@@ -122,10 +122,34 @@ class LinkedBinaryTree(BinaryTree):
         return self._make_position(self._root)
 
     def _add_left(self, p, e):
-        pass
+        """Create a new left child for node at position 'p' containing element 'e'.
+
+        Raise ValueError if position is invalid, or if position already has left child.
+        @return - position of the newly added left child node
+        """
+        parent_node = self._validate(p)
+        if parent_node._left is not None:
+            raise ValueError("Node already has a left child.")
+
+        new_left = self._Node(element=e, parent=parent_node)
+        parent_node._left = new_left
+        self._size += 1
+        return self._make_position(parent_node._left)
 
     def _add_right(self, p, e):
-        pass
+        """Create a new right child for node at position 'p' containing element 'e'.
+
+        Raise ValueError if position is invalid, or if position already has right child.
+        @return - position of the newly added right child node
+        """
+        parent_node = self._validate(p)
+        if parent_node._right is not None:
+            raise ValueError("Node already has a right child.")
+
+        new_right = self._Node(element=e, parent=parent_node)
+        parent_node._right = new_right
+        self._size += 1
+        return self._make_position(parent_node._right)
 
     def _replace(self, p, e):
         pass
