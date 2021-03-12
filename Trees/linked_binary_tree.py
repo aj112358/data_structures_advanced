@@ -152,7 +152,11 @@ class LinkedBinaryTree(BinaryTree):
         return self._make_position(parent_node._right)
 
     def _replace(self, p, e):
-        pass
+        """Replace the element at position 'p' with new element 'e', and return the old element."""
+        node = self._validate(p)
+        elem = node._element
+        node._element = e
+        return elem
 
     def _delete(self, p):
         pass
