@@ -5,6 +5,7 @@ Date: March 9, 2021
 """
 
 from abc import abstractmethod, ABC
+from Linked_Lists.queue_via_linked_list import LinkedQueue
 
 
 class Tree(ABC):
@@ -132,3 +133,17 @@ class Tree(ABC):
         if not self.is_empty():
             for p in self._subtree_postorder(self.root()):
                 yield p  # Re-yielding all positions generated in the recursive process in utility method.
+
+    def breadth_first(self):
+        """Generate a breadth-first iteration of positions in a tree."""
+        if not self.is_empty():
+
+            Q = LinkedQueue()  # Positions to visit.
+            Q.enqueue(self.root())
+
+            while not Q.is_empty():
+                p = Q.dequeue()
+                yield p
+
+                for c in self.children(p):
+                    Q.enqueue(c)  # Add next children to back of queue.
