@@ -92,3 +92,10 @@ class Tree(ABC):
         if p is None:
             p = self.root()
         return self.__height(p)
+
+    # ----- Tree Traversal Algorithms ----- #
+
+    def __iter__(self):
+        """Generate an iteration of the *elements* of a tree."""
+        for p in self.positions():
+            yield p.element()
