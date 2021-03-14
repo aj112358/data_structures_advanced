@@ -46,3 +46,29 @@ class BinaryTree(Tree):
             yield self.left(p)
         if self.right(p) is not None:
             yield self.right(p)
+
+    # ----- Tree Traversal Algorithms ----- #
+
+    # For binary trees, we use inorder traversal as the default (useful in applications).
+    def positions(self):
+        """Generate an iteration of a binary tree's positions, using inorder traversal."""
+        return self.inorder()  # Return entire iteration as an object.
+
+    # Utility method to help with determining subtree for inorder traversal.
+    def _subtree_inorder(self, p):
+        """Generate an inorder iteration of positions in subtree rooted at p."""
+        if self.left(p) is not None:
+            for other in self._subtree_inorder(self.left(p)):
+                yield other
+
+        yield p  # Return p in-between visits of subtrees.
+
+        if self.right(p) is not None:
+            for other in self._subtree_inorder(self.right(p)):
+                yield other
+
+    def inorder(self):
+        """Generate an inorder iteration of positions in the tree."""
+        if not self.is_empty():
+            for p in self._subtree_inorder(self.root()):
+                yield p  # Re-yielding all positions generated in the recursive process in utility method.
