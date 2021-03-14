@@ -99,3 +99,22 @@ class Tree(ABC):
         """Generate an iteration of the *elements* of a tree."""
         for p in self.positions():
             yield p.element()
+
+    # Utility method to help with determining subtree for preorder traversal.
+    def _subtree_preorder(self, p):
+        """Generate a preorder iteration of positions in subtree rooted at p."""
+        yield p
+        for c in self.children(p):
+            for other in self._subtree_preorder(c):  # Do preorder for subtree of c.
+                yield other
+
+    def preorder(self):
+        """Generate a preorder iteration of positions in the tree."""
+        if not self.is_empty():
+            for p in self._subtree_preorder(self.root()):
+                yield p  # Re-yielding all positions generated in the recursive process in utility method.
+
+    # By default, uses preorder traversal to get the positions.
+    def positions(self):
+        """Generate an iteration of the tree's positions."""
+        return self.preorder()  # Return entire iteration as an object.
