@@ -15,16 +15,21 @@ def merge(s1, s2, s=None):
     while i + j < len(s1) + len(s2):
 
         # Not all s1 elements have been used.
-        if i < len(s1) and (s1[i] < s2[j]):
-            s[i + j] = s1[i]
-            i += 1
+        if i < len(s1):
+
+            if j == len(s2) or (s1[i] < s2[j]):
+                s[i + j] = s1[i]
+                i += 1
+            else:
+                s[i + j] = s2[j]
+                j += 1
 
         # All s1 elements have been used.
         else:
             s[i + j] = s2[j]
             j += 1
 
-        return s
+    return s
 
 
 
