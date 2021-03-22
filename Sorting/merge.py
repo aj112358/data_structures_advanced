@@ -14,22 +14,36 @@ def merge(s1, s2, s=None):
     i = j = 0
     while i + j < len(s1) + len(s2):
 
-        if i < len(s1) and j < len(s2):
-            if s1[i] < s2[j]:
-                s[i + j] = s1[i]
-                i += 1
-            else:
-                s[i+j] = s2[j]
-                j += 1
-        elif i < len(s1):
+        # Not all s1 elements have been used.
+        if i < len(s1) and (s1[i] < s2[j]):
             s[i + j] = s1[i]
             i += 1
+
+        # All s1 elements have been used.
         else:
             s[i + j] = s2[j]
             j += 1
 
-    if s is None:
         return s
+
+
+
+    #     if i < len(s1) and j < len(s2):
+    #         if s1[i] < s2[j]:
+    #             s[i + j] = s1[i]
+    #             i += 1
+    #         else:
+    #             s[i + j] = s2[j]
+    #             j += 1
+    #     elif i < len(s1):  # j is done
+    #         s[i + j] = s1[i]
+    #         i += 1
+    #     else:  # i is done
+    #         s[i + j] = s2[j]
+    #         j += 1
+    #
+    # # if s is None:
+    # return s
 
 
 if __name__ == "__main__":
