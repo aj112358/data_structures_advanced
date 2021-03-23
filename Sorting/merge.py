@@ -6,7 +6,10 @@ Date: March 22, 2021
 
 
 def merge(s1, s2, s=None):
-    """Given sorted arrays s1 & s2, merge them together into array s."""
+    """Given sorted arrays s1 & s2, merge them together into array s.
+
+    Returns the combined sorted array.
+    """
 
     if s is None:
         s = [None] * (len(s1) + len(s2))
