@@ -1,11 +1,10 @@
-"""An implementation of sorting a linked list using the merge-sort algorithm.
-
-Uses a queue data structure implemented using an underlying linked list.
+"""An implementation of sorting a queue data structure using the merge-sort algorithm.
 
 Created By: AJ Singh
 Date: March 23, 2021
 """
 
+from math import floor
 from Linked_Lists.queue_via_linked_list import LinkedQueue
 
 
@@ -27,5 +26,30 @@ def merge(s1, s2, s=None):
 
     while not s2.is_empty():  # Merge any remaining elements in s2.
         s.enqueue(s2.dequeue())
+
+    return s
+
+
+def merge_sort(s):
+    """Sort the elements of a queue 's' using the merge-sort algorithm."""
+
+    if len(s) in {0, 1}:
+        return s
+
+    s1 = LinkedQueue()
+    s2 = LinkedQueue()
+
+    mid = floor(len(s) / 2)
+
+    while len(s1) < mid:
+        s1.enqueue(s.dequeue())
+
+    while not S.is_empty():
+        s2.enqueue(s.dequeue())
+
+    merge_sort(s1)
+    merge_sort(s2)
+
+    merge(s1, s2, s)
 
     return s
