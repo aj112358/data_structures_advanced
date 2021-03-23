@@ -41,10 +41,10 @@ def merge_sort(s):
 
     mid = floor(len(s) / 2)
 
-    while len(s1) < mid:
+    while len(s1) < mid:  # Transfer first half of elements in s to s1.
         s1.enqueue(s.dequeue())
 
-    while not S.is_empty():
+    while not s.is_empty():  # Transfer second half of elements in s to s2.
         s2.enqueue(s.dequeue())
 
     merge_sort(s1)
