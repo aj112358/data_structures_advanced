@@ -11,7 +11,7 @@ def quick_sort(s):
     """Sorts the elements of the queue 's' using the quick-sort algorithm."""
 
     if len(s) in {0, 1}:
-        return
+        return s
 
     pivot = s.first()
 
@@ -19,8 +19,8 @@ def quick_sort(s):
     equal = LinkedQueue()
     greater = LinkedQueue()
 
-    elem = s.first()
     while not s.is_empty():
+        elem = s.first()
         if elem < pivot:
             less.enqueue(s.dequeue())
         elif elem > pivot:
@@ -28,41 +28,40 @@ def quick_sort(s):
         else:
             equal.enqueue(s.dequeue())
 
-        if len(s) == 0:
-            break
-        elem = s.first()
+    # print("Less elements")
+    # while not less.is_empty():
+    #     print(less.dequeue())
 
     quick_sort(less)
     quick_sort(greater)
 
-    while len(less) != 0:
+    while not less.is_empty():
         s.enqueue(less.dequeue())
-    while len(equal) != 0:
+    while not equal.is_empty():
         s.enqueue(equal.dequeue())
-    while len(greater) != 0:
+    while not greater.is_empty():
         s.enqueue(greater.dequeue())
 
-    print("HellO", len(s))
+    # while not s.is_empty():
+    #     print(s.dequeue())
 
-    # while len(s) != 0:
-    #     print(s.dequeue(), end=" ")
-
-    # return s
+    return s
 
 
 if __name__ == "__main__":
     seq = LinkedQueue()
     elements = [50, 85, 24, 63, 45, 17, 31, 96]
-
     for _ in elements:
         seq.enqueue(_)
 
-    print("Original:")
-    while len(seq) != 0:
-        print(seq.dequeue(), end=" ")
+    x = quick_sort(seq)
 
-    quick_sort(seq)
+    # print("Original:")
+    # while len(seq) != 0:
+    #     print(seq.dequeue(), end=" ")
 
     print("\n\nSorted:")
     while len(seq) != 0:
         print(seq.dequeue(), end=" ")
+    # while len(x) != 0:
+    #     print(x.dequeue(), end=" ")
