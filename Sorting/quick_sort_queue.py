@@ -51,17 +51,14 @@ def quick_sort(s):
 if __name__ == "__main__":
     seq = LinkedQueue()
     elements = [50, 85, 24, 63, 45, 17, 31, 96]
+
+    print("Original:")
     for _ in elements:
         seq.enqueue(_)
+        print(_, end=" ")
 
-    x = quick_sort(seq)
-
-    # print("Original:")
-    # while len(seq) != 0:
-    #     print(seq.dequeue(), end=" ")
+    quick_sort(seq)
 
     print("\n\nSorted:")
     while len(seq) != 0:
         print(seq.dequeue(), end=" ")
-    # while len(x) != 0:
-    #     print(x.dequeue(), end=" ")
