@@ -13,24 +13,18 @@ def quick_sort(s):
     if len(s) in {0, 1}:
         return s
 
-    pivot = s.first()
-
     less = LinkedQueue()
     equal = LinkedQueue()
     greater = LinkedQueue()
 
+    pivot = s.first()
     while not s.is_empty():
-        elem = s.first()
-        if elem < pivot:
+        if s.first() < pivot:
             less.enqueue(s.dequeue())
-        elif elem > pivot:
+        elif s.first() > pivot:
             greater.enqueue(s.dequeue())
         else:
             equal.enqueue(s.dequeue())
-
-    # print("Less elements")
-    # while not less.is_empty():
-    #     print(less.dequeue())
 
     quick_sort(less)
     quick_sort(greater)
@@ -41,9 +35,6 @@ def quick_sort(s):
         s.enqueue(equal.dequeue())
     while not greater.is_empty():
         s.enqueue(greater.dequeue())
-
-    # while not s.is_empty():
-    #     print(s.dequeue())
 
     return s
 
