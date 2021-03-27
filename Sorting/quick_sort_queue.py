@@ -1,5 +1,7 @@
 """An implementation of the quick-sort algorithm that operates on any queue-based sequence.
 
+Pivot is chosen as first element in queue, as that is easy to retrieve in a queue.
+
 Created By: AJ Singh
 Date: March 26, 2021
 """
@@ -17,7 +19,7 @@ def quick_sort(s):
     equal = LinkedQueue()
     greater = LinkedQueue()
 
-    pivot = s.first()
+    pivot = s.first()  # Easy to retrieve first element in a queue.
     while not s.is_empty():
         if s.first() < pivot:
             less.enqueue(s.dequeue())
