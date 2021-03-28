@@ -38,4 +38,4 @@ if __name__ == "__main__":
     print(*seq, sep=" ")
 
     print("\nSorted:")
-    print(bucket_sort(seq, 5))
+    print(bucket_sort(seq, max(seq)))
