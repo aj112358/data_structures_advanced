@@ -32,3 +32,10 @@ if __name__ == "__main__":
 
     print("\nSorted:")
     print(bucket_sort(seq, 5))
+
+    seq = [290, 250, 40, 490, 90, 370, 210, 430]
+    print("Original:")
+    print(*seq, sep=" ")
+
+    print("\nSorted:")
+    print(bucket_sort(seq, 5))
