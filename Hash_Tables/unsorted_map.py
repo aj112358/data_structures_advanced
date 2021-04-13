@@ -34,11 +34,18 @@ class UnsortedMap(MapBase):
         else:
             raise KeyError("Key {0} does not exist in map.".format(k))
 
-    def __delitem__(self, v):
-        pass
+    def __delitem__(self, k):
+        """Remote the item associated with key k; raise KeyError if doesn't exist."""
+
+        for index, item in enumerate(self._table):
+            if item._key == k:
+                self._table.pop(index)
+        else:
+            raise KeyError("Key {0} does not exist in map.".format(k))
 
     def __len__(self):
-        pass
+        """Return number of items in the map."""
+        return len(self._table)
 
     def __iter__(self):
         pass
