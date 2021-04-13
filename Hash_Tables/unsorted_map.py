@@ -48,7 +48,10 @@ class UnsortedMap(MapBase):
         return len(self._table)
 
     def __iter__(self):
-        pass
+        """Generate iteration of keys in the map."""
+
+        for item in self._table:
+            yield item._key
 
 
 if __name__ == "__main__":
@@ -56,4 +59,4 @@ if __name__ == "__main__":
     x = UnsortedMap()
     x["a"] = 1
     print(x["a"])
-    x["b"]
+    print(x["b"])
