@@ -22,6 +22,7 @@ class HashMapBase(MapBase):
 
     def _hash_function(self, i):
         """Using MAD method for compression. Uses Python's built-in hash function."""
+        # Using formula for MAD compression: i -> (a*i+b) mod p mod N
         return ((self._scale * hash(i) + self._shift) % self._prime) % len(self._table)
 
     def __len__(self) -> int:
