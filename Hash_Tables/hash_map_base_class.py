@@ -22,19 +22,25 @@ class HashMapBase(MapBase):
 
     def _hash_function(self, i):
         """Using MAD method for compression. Uses Python's built-in hash function."""
-        return ((self._scale * hash(i) + self._shift) % self._prime) % self._size
+        return ((self._scale * hash(i) + self._shift) % self._prime) % len(self._table)
 
     def __len__(self) -> int:
         return self._size
 
-    def __setitem__(self, k: _KT, v: _VT) -> None:
-        pass
+    def __setitem__(self, k, v):
+        j = self._hash_function(k)
+        self._bucket_setitem(j, k, v)  # Will maintain/update self._size
 
-    def __getitem__(self, k: _KT) -> _VT_co:
-        pass
+        # Check if load factor increases beyond 0.5
+        if self._size > len(self._table) // 2:
+            self._resize(2 * len(self._table) - 1)
+
+    def __getitem__(self, k):
+        j = self._hash_function(k)
+        return self._bucket_getitem(j, k)
 
     def __delitem__(self, v: _KT) -> None:
         pass
 
-    def _resize(self):
+    def _resize(self, capacity):
         pass
