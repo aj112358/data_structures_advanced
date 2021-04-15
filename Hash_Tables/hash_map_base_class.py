@@ -39,8 +39,15 @@ class HashMapBase(MapBase):
         j = self._hash_function(k)
         return self._bucket_getitem(j, k)
 
-    def __delitem__(self, v: _KT) -> None:
-        pass
+    def __delitem__(self, k) -> None:
+        j = self._hash_function(k)
+        self._bucket_delitem(j, k)
+        self._size -= 1
 
     def _resize(self, capacity):
-        pass
+        """Resize bucket array to specified capacity."""
+        old_table = list(self.items())   # Keeping track of items in current map.
+        self._table = [None] * capacity  # Setting up bucket array for re-sized map.
+        self._size = 0                   # Reset the size (will update via setter)
+        for (k, v) in old_table:  # Re-inserting items into new bucket array.
+            self[k] = v           # Will use __setitem__
