@@ -16,15 +16,16 @@ class HashMapBase(MapBase):
         """Initializes a new empty hash table."""
         self._table = [None] * capacity
         self._size = 0                        # Number of unique entries in map.
-        self._prime = prime                   # Prime number needed for MAD compression.
+        self._prime = prime                   # Prime number needed for MAD compression. (Should be larger than size).
         self._scale = 1 + randrange(prime-1)  # Scale needed for MAD.
         self._shift = randrange(prime)        # Shift needed for MAD.
 
-    def _hash_function(self):
-        pass
+    def _hash_function(self, i):
+        """Using MAD method for compression. Uses Python's built-in hash function."""
+        return ((self._scale * hash(i) + self._shift) % self._prime) % self._size
 
     def __len__(self) -> int:
-        pass
+        return self._size
 
     def __setitem__(self, k: _KT, v: _VT) -> None:
         pass
