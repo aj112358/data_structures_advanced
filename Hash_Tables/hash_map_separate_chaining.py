@@ -42,4 +42,13 @@ class ChainHashMap(HashMapBase):
         self._size -= 1
 
     def __iter__(self):
-        pass
+
+        # for bucket in self._table:
+        #     if bucket is None:
+        #         continue
+        #     iter(bucket)
+
+        for bucket in self._table:
+            if bucket is not None:
+                for key in bucket:
+                    yield key
