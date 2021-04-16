@@ -27,10 +27,19 @@ class ChainHashMap(HashMapBase):
             self._size += 1  # Increment number of unique entries in map.
 
     def _bucket_getitem(self, j, k):
-        pass
+
+        bucket = self._table[j]
+        if bucket is None:
+            raise KeyError("Key Error: " + repr(k))
+        return bucket[k]
 
     def _bucket_delitem(self, j, k):
-        pass
+
+        bucket = self._table[j]
+        if bucket is None:
+            raise KeyError("Key Error: " + repr(k))
+        del bucket[k]
+        self._size -= 1
 
     def __iter__(self):
         pass
