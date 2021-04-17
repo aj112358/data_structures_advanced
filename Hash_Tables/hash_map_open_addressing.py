@@ -80,8 +80,23 @@ class ProbeHashMap(HashMapBase):
         return self._table[index]._value
 
     def _bucket_delitem(self, j, k):
-        pass
+
+        # Check if item (k,v) pair already exists in map.
+        found, index = self._find_slot(j, k)
+
+        if not found:
+            raise KeyError("Key Error: " + repr(k))
+        # del self._table[index]._value  # CANT SIMPLY DELETE!!!!
+
+        self._table[index] = ProbeHashMap._AVAILABLE
 
     def __iter__(self):
-        pass
+
+        # for bucket in self._table:
+        #     if bucket is not None:
+        #         yield bucket._key
+
+        for index in range(len(self._table)):  # Need to look at indices in bucket array.
+            if not self._is_available(index):  # "Is available" means contains *no* element!
+                yield self._table[index]._key
 
