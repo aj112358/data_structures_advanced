@@ -28,6 +28,12 @@ class ProbeHashMap(HashMapBase):
         """Search for key k in bucket at index j. Note: The key may not be located at index j literally (because of
         linear probing).
 
+        With regards to empty slots, we give priority to re-using a slot (ie. slots that contain _AVAIL object).
+
+        Also, because of resizing, there WILL always be a slot with "None", so the while-loop will terminate eventually.
+        When it does, the index j it returns will be the _AVAIL object's index (if exists) OR will be the None index
+        (if no items were removed from the map).
+
         @return: Tuple (success, index) defined as:
             - If match is found, 'success' is True & 'index' is the found location.
             - If match not found, 'success' is False & 'index' will be the first available slot.
