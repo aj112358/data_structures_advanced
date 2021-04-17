@@ -60,10 +60,24 @@ class ProbeHashMap(HashMapBase):
     # ----- Concrete Methods ----- #
 
     def _bucket_setitem(self, j, k, v):
-        pass
+
+        # Check if item (k,v) pair already exists in map.
+        found, index = self._find_slot(j, k)
+
+        if not found:  # Doesn't exist in map; create new item entry.
+            self._table[index] = self._Item(k, v)
+            self._size += 1
+        else:  # Already exists in map; reassign value.
+            self._table[index]._value = v
 
     def _bucket_getitem(self, j, k):
-        pass
+
+        # Check if item (k,v) pair already exists in map.
+        found, index = self._find_slot(j, k)
+
+        if not found:
+            raise KeyError("Key Error: " + repr(k))
+        return self._table[index]._value
 
     def _bucket_delitem(self, j, k):
         pass
