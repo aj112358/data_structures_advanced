@@ -39,10 +39,23 @@ class SortedTableMap(MapBase):
     # ----- Inherited Abstract Methods ----- #
 
     def __setitem__(self, k, v):
-        pass
+        """Assigns value v to key k; overwrites value if key already exists."""
+
+        index = self._find_index(k, 0, len(self._table)-1)
+
+        if index < len(self._table) and self._table[index]._key == k:
+            self._table[j]._value = k
+        else:
+            self._table.insert(__index=index, __object=v)
 
     def __getitem__(self, k):
-        pass
+        """Return value associated with key k; else raise KeyError if key not in map."""
+
+        index = self._find_index(k, 0, len(self._table)-1)
+
+        if index == len(self._table) or self._table[index]._key != k:
+            raise KeyError("Key not found. Key Error: " + repr(k))
+        return self._table[index]._value
 
     def __delitem__(self, v):
         pass
