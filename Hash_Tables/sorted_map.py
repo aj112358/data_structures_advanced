@@ -71,15 +71,24 @@ class SortedTableMap(MapBase):
         return len(self._table)
 
     def __iter__(self):
-        pass
+        """Generate keys of the map ordered from smallest to largest (as per the natural ordering of the keys)."""
+
+        for item in self._table:
+            yield item._key
 
     # ----- Sorted Map ADT Methods ----- #
 
     def find_min(self):
-        pass
+        """Return key-value pair with the minimum key."""
+        if len(self._table) > 0:
+            return self._table[0]._key, self._table[0]._value
+        return None
 
     def find_max(self):
-        pass
+        """Return key-value pair with the maximum key."""
+        if len(self._table) > 0:
+            return self._table[-1]._key, self._table[-1]._value
+        return None
 
     def find_lt(self, k):
         pass
