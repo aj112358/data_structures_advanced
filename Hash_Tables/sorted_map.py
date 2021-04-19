@@ -57,11 +57,18 @@ class SortedTableMap(MapBase):
             raise KeyError("Key not found. Key Error: " + repr(k))
         return self._table[index]._value
 
-    def __delitem__(self, v):
-        pass
+    def __delitem__(self, k):
+        """Remove item associated with key k; raise KeyError if key not in map. Doesn't return anything."""
+
+        index = self._find_index(k, 0, len(self._table) - 1)
+
+        if index == len(self._table) or self._table[index]._key != k:
+            raise KeyError("Key not found. Key Error: " + repr(k))
+        self._table.pop(index)
 
     def __len__(self):
-        pass
+        """Return number of items in map."""
+        return len(self._table)
 
     def __iter__(self):
         pass
