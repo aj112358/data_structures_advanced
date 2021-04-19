@@ -91,16 +91,52 @@ class SortedTableMap(MapBase):
         return None
 
     def find_lt(self, k):
-        pass
+        """Return key-value pair with greatest key that is strictly less than k, or None if does not exist."""
+        index = self._find_index(k, 0, len(self._table)-1)
+
+        # if index == len(self._table):
+        #     raise KeyError("No such key exists.")
+        # if self._table[index] == k:
+        #     index -= 1
+        #     return self._table[index]._key, self._table[index]._value
+
+        if index > 0 and self._table[index]._key == k:
+            index -= 1
+
+        if index > 0:
+            return self._table[index]._key, self._table[index]._value
+        return None
 
     def find_le(self, k):
-        pass
+        """Return key-value pair with largest key that is less than or equal to k, or None if does not exist."""
+
+        index = self._find_index(k, 0, len(self._table) - 1)
+
+        if index > 0:
+            return self._table[index]._key, self._table[index]._value
+        return None
 
     def find_gt(self, k):
-        pass
+        """Return key-value pair with smallest key that is strictly greater than k, or None if does not exist."""
+
+        index = self._find_index(k, 0, len(self._table) - 1)
+
+        if index < len(self._table) and self._table[index]._key == k:
+            index += 1
+        if index < len(self._table):
+            index += 1
+            return self._table[index]._key, self._table[index]._value
+        return None
 
     def find_ge(self, k):
-        pass
+        """Return key-value pair with smallest key that is greater than or equal to k, or None if does not
+        exist."""
+
+        index = self._find_index(k, 0, len(self._table) - 1)
+
+        if index < len(self._table):
+            return self._table[index]._key, self._table[index]._value
+        return None
 
     def find_range(self, start, stop):
         pass
