@@ -44,7 +44,7 @@ class SortedTableMap(MapBase):
         index = self._find_index(k, 0, len(self._table)-1)
 
         if index < len(self._table) and self._table[index]._key == k:
-            self._table[j]._value = k
+            self._table[index]._value = k
         else:
             self._table.insert(__index=index, __object=v)
 
