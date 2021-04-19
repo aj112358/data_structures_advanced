@@ -139,7 +139,20 @@ class SortedTableMap(MapBase):
         return None
 
     def find_range(self, start, stop):
-        pass
+        """Iterate all key-value pairs such that start <= key < stop.
+
+        If start=None, iteration begins with minimum key in map.
+        If stop=None, iteration continues through maximum key in map.
+        """
+
+        # Determine starting array index.
+        index = 0 if start is None else self._find_index(start, 0, len(self._table)-1)
+
+        while index < len(self._table) and (stop is None or self._table[index]._key < stop):
+            yield self._table[index]._key, self._table[index]._value
 
     def __reversed__(self):
-        pass
+        """Generate keys of the map ordered from smallest to largest (as per their natural ordering)."""
+
+        for item in reversed(self._table):
+            yield item._keys
