@@ -4,7 +4,6 @@ book.
 Created By: AJ Singh
 Date: April 18, 2021
 """
-from typing import Iterator, _T_co, _KT, _VT_co, _VT
 
 from hash_map_base_class import MapBase
 
@@ -14,26 +13,44 @@ class SortedTableMap(MapBase):
 
     # ----- Non-Public Utility Method ----- #
     def _find_index(self, k, low, high):
-        pass
+        """Return the index of the left-most item with key greater than or equal to k. Return high+1 if no such item
+        exists.
+
+        So, index j will be returned such that:
+            (i) All items of slice table[low:j] have key < k
+            (ii) All items of slice table[j:high+1] have key >= k
+        """
+
+        if high < low:
+            return high + 1
+        else:
+            mid = (low + high) // 2
+            if self._table[mid]._key == k:
+                return mid
+            elif self._table[mid]._key > k:
+                return self._find_index(k, low, mid - 1)
+            else:
+                return self._find_index(k, mid + 1, high)
 
     def __init__(self):
-        pass
+        """Initialize an empty sorted map."""
+        self._table = list()
 
     # ----- Inherited Abstract Methods ----- #
 
-    def __setitem__(self, k: _KT, v: _VT) -> None:
+    def __setitem__(self, k, v):
         pass
 
-    def __getitem__(self, k: _KT) -> _VT_co:
+    def __getitem__(self, k):
         pass
 
-    def __delitem__(self, v: _KT) -> None:
+    def __delitem__(self, v):
         pass
 
-    def __len__(self) -> int:
+    def __len__(self):
         pass
 
-    def __iter__(self) -> Iterator[_T_co]:
+    def __iter__(self):
         pass
 
     # ----- Sorted Map ADT Methods ----- #
