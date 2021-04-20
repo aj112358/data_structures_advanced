@@ -17,10 +17,12 @@ class MultiMap:
 
     def add(self, k, v):
         """Add pair (k,v) to multimap."""
-        if k not in self._map:
-            self._map[k] = list(v)
-        else:
-            self._map[k].append(v)
+        # if k not in self._map:
+        #     self._map[k] = list()
+        # self._map[k].append(v)
+
+        container = self._map.setdefault(k, list())
+        container.append(v)
         self._n += 1
 
     def pop(self, k):
