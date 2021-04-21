@@ -31,19 +31,25 @@ class MultiMap:
             raise KeyError("Set is empty.")
 
         container = self._map[k]  # Will raise KeyError if k not in set. Gets all values associated with key k.
-        v = container.pop()       # Return one random value.
+        v = container.pop()       # Return an arbitrary value. (BUT in new versions of Python, will only return last value?)
 
         if len(container) == 0:   # Check if key has any remaining values.
             del self._map[k]      # If not, can remove key from set.
         self._n -= 1
         return k, v
 
-
     def find(self, k):
-        pass
+        """Return 'arbitrary' (k,v) item with key k, or raise KeyError if k does not exist."""
+
+        container = self._map[k]  # May raise KeyError.
+        v = container[0]
+        return k, v
 
     def find_all(self, k):
-        pass
+        """Generate iteration of all (k,v) pairs with key k."""
+        container = self._map.get(k, list())
+        for v in container:
+            yield k, v
 
     def __iter__(self):
         pass
