@@ -52,4 +52,7 @@ class MultiMap:
             yield k, v
 
     def __iter__(self):
-        pass
+        """Iterate through all (k,v) pairs in multimap."""
+        for k, container in self._map.items():
+            for v in container:
+                yield k, v
