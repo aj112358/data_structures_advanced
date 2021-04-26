@@ -36,10 +36,12 @@ class UnsortedPriorityQueue(PriorityQueueBase):
         self._data = PositionalList()
 
     def __len__(self):
-        pass
+        return len(self._data)
 
     def add(self, key, value):
-        pass
+        """Add a new key-value pair to the priority queue."""
+        new_item = self._Item(key, value)
+        self._data.add_last(new_item)  # Since priority queue is unsorted, we just add element at the end.
 
     def min(self):
         pass
