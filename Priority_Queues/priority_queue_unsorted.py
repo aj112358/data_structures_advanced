@@ -44,7 +44,13 @@ class UnsortedPriorityQueue(PriorityQueueBase):
         self._data.add_last(new_item)  # Since priority queue is unsorted, we just add element at the end.
 
     def min(self):
-        pass
+        """Return, but do not remove, the (k,v) tuple with a minimum key."""
+        min_pos = self._find_min()
+        min_item = min_pos.element()
+        return min_item._key, min_item._value
 
     def remove_min(self):
-        pass
+        """Return and remove the (k,v) tuple with a minimum key."""
+        min_pos = self._find_min()
+        min_item = self._data.delete(min_pos)
+        return min_item._key, min_item._value
