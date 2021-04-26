@@ -8,6 +8,11 @@ from priority_queue_base_class import PriorityQueueBase
 from Linked_Lists.positional_list import PositionalList
 
 
+class Empty(Exception):
+    """The error to raise when attempting to access an element from an empty priority queue."""
+    pass
+
+
 class SortedPriorityQueue(PriorityQueueBase):
     """A minimum-oriented priority queue implementation with a sorted positional list."""
 
@@ -34,7 +39,19 @@ class SortedPriorityQueue(PriorityQueueBase):
             self._data.add_after(walk, newest)
 
     def min(self):
-        pass
+        """Return, but do not remove, (k,v) tuple with a minimum key."""
+        if self.is_empty():
+            raise Empty("No elements in priority queue!")
+
+        min_pos = self._data.first()  # Because our positional list is sorted!
+        min_item = min_pos.element()
+        return min_item._key, min_item._value
 
     def remove_min(self):
-        pass
+        """Remove and return the (k,v) tuple with a minimum key."""
+        if self.is_empty():
+            raise Empty("No elements in priority queue!")
+
+        min_pos = self._data.first()  # Because our positional list is sorted!
+        min_item = self._data.delete(min_pos)
+        return min_item._key, min_item._value
