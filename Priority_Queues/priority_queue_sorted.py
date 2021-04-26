@@ -12,10 +12,12 @@ class SortedPriorityQueue(PriorityQueueBase):
     """A minimum-oriented priority queue implementation with a sorted positional list."""
 
     def __init__(self):
-        pass
+        """Create a new empty priority queue."""
+        self._data = PositionalList()
 
     def __len__(self):
-        pass
+        """Return number of elements in priority queue."""
+        return len(self._data)
 
     def add(self, key, value):
         pass
