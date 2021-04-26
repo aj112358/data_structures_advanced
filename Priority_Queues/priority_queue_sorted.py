@@ -20,7 +20,18 @@ class SortedPriorityQueue(PriorityQueueBase):
         return len(self._data)
 
     def add(self, key, value):
-        pass
+        """Adds a new key-value item to the priority queue."""
+        newest = self._Item(key, value)
+        walk = self._data.last()  # We start at the *highest* element, and walk backwards to find correct position.
+
+        # Finding correct position to insert new element.
+        while walk is not None and newest < walk.element():
+            walk = self._data.before(walk)
+
+        if walk is None:  # Newest element is smaller than existing elements.
+            self._data.add_first(newest)
+        else:
+            self._data.add_after(walk, newest)
 
     def min(self):
         pass
