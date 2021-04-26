@@ -8,15 +8,32 @@ from Linked_Lists.positional_list import PositionalList
 from priority_queue_base_class import PriorityQueueBase
 
 
+class Empty(Exception):
+    """The error to raise when attempting to access an element from an empty priority queue."""
+    pass
+
+
 class UnsortedPriorityQueue(PriorityQueueBase):
     """A minimum-oriented priority queue implemented with an unsorted positional list."""
 
     # Non-Public Utility Method
     def _find_min(self):
-        pass
+        """Returns position of item of minimal key."""
+        if self.is_empty():
+            raise Empty("Priority queue is empty.")
+
+        smallest = self._data.first()
+        walk = self._data.after(smallest)
+        while walk is not None:
+            if walk.element() < smallest.element():
+                smallest = walk
+            walk = self._data.after(walk)
+
+        return smallest
 
     def __init__(self):
-        pass
+        """Create a new empty priority queue."""
+        self._data = PositionalList()
 
     def __len__(self):
         pass
