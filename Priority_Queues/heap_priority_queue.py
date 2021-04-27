@@ -61,10 +61,14 @@ class HeapPriorityQueue(PriorityQueueBase):
         self._data = list()
 
     def __len__(self):
-        pass
+        """Return the number of items in the priority queue."""
+        return len(self._data)
 
-    def add(self):
-        pass
+    def add(self, k, v):
+        """Add a new key-value pair to the priority queue."""
+        new_item = self._Item(k, v)
+        self._data.append(new_item)
+        self._upheap(len(self._data)-1)
 
     def min(self):
         pass
