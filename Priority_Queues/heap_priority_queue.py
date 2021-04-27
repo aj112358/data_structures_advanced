@@ -12,20 +12,20 @@ class HeapPriorityQueue(PriorityQueueBase):
 
     # ----- Non-Public Utility Functions ----- #
 
-    def _parent(self):
-        pass
+    def _parent(self, j):
+        return (j-1) // 2
 
-    def _left(self):
-        pass
+    def _left(self, j):
+        return 2*j+1
 
-    def _right(self):
-        pass
+    def _right(self, j):
+        return 2*j+2
 
-    def _has_left(self):
-        pass
+    def _has_left(self, j):
+        return self._left(j) < len(self._data)
 
-    def _has_right(self):
-        pass
+    def _has_right(self, j):
+        return self._right(j) < len(self._data)
 
     def _swap(self):
         pass
@@ -39,7 +39,8 @@ class HeapPriorityQueue(PriorityQueueBase):
     # ----- Public ADT Methods ----- #
 
     def __init__(self):
-        pass
+        """Create a new empty priority queue."""
+        self._data = list()
 
     def __len__(self):
         pass
