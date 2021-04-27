@@ -7,6 +7,11 @@ Date: April 27, 2021
 from priority_queue_base_class import PriorityQueueBase
 
 
+class Empty(Exception):
+    """The error to raise when attempting to access an element from an empty priority queue."""
+    pass
+
+
 class HeapPriorityQueue(PriorityQueueBase):
     """A minimum-oriented priority queue implemented with a binary heap."""
 
@@ -71,7 +76,19 @@ class HeapPriorityQueue(PriorityQueueBase):
         self._upheap(len(self._data)-1)
 
     def min(self):
-        pass
+        """Return, but do not remove, a (k,v) tuple with minimum key k, or raise exception if priority queue is empty"""
+        if self.is_empty():
+            raise Empty("Priority queue contains no elements!")
+
+        min_item = self._data[0]
+        return min_item._key, min_item._value
 
     def remove_min(self):
-        pass
+        """Remove and return a (k,v) tuple with minimum key k, or raise exception is priority queue is empty."""
+        if self.is_empty():
+            raise Empty("Priority queue contains no elements!")
+
+        self._swap(0, len(self._data)-1)
+        min_item = self._data.pop()
+        self._downheap(0)
+        return min_item._key, min_item._value
