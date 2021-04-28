@@ -5,6 +5,7 @@ Date: April 28, 2021
 """
 
 from priority_queue_unsorted import UnsortedPriorityQueue
+from Linked_Lists.positional_list import PositionalList
 
 
 def pq_sort(container):
@@ -25,7 +26,13 @@ def pq_sort(container):
 
 
 if __name__ == "__main__":
-    x = [5, 4, 3, 2, 1]
+    x = [5, 4, 35, 2, 1, 200]
 
-    pq_sort(x)
-    print(x)
+    pos_list = PositionalList()
+    for _ in range(len(x)):
+        pos_list.add_first(x.pop())
+
+    pq_sort(pos_list)
+
+    for elem in pos_list:
+        print(elem, end=" ")
