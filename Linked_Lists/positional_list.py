@@ -4,7 +4,7 @@ Created By: AJ Singh
 Date: March 5, 2021
 """
 
-from doubly_linked_list_base_class import _DoublyLinkedBase
+from Linked_Lists.doubly_linked_list_base_class import _DoublyLinkedBase
 
 
 class PositionalList(_DoublyLinkedBase):
